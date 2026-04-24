@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>OJT E-Portfolio | Group Name</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0f0e;
+    --bg2: #151817;
+    --bg3: #1c201e;
+    --accent: #5DCAA5;
+    --accent2: #1D9E75;
+    --accent3: #9FE1CB;
+    --text: #e8ede9;
+    --text2: #8fa897;
+    --text3: #5a6e60;
+    --border: rgba(93,202,165,0.15);
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Jost', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(13,15,14,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: .02em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text2);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 22px; height: 1.5px; background: var(--text2); }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 100px 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    align-items: center;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+  .hero-title em { color: var(--accent); font-style: italic; }
+  .hero-body { font-size: 15px; color: var(--text2); max-width: 440px; margin-bottom: 2rem; }
+  .hero-meta {
+    display: flex;
+    gap: 2rem;
+  }
+  .hero-stat-label { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--text3); }
+  .hero-stat-val { font-family: var(--serif); font-size: 22px; color: var(--accent); }
+  .hero-deco {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .hero-deco-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    transition: border-color .2s;
+  }
+  .hero-deco-card:hover { border-color: var(--accent2); }
+  .hero-deco-card:first-child { grid-column: 1 / -1; }
+  .hdc-label { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--text3); margin-bottom: .5rem; }
+  .hdc-val { font-family: var(--serif); font-size: 15px; color: var(--accent3); }
+  .bg-ring {
+    position: absolute;
+    right: -200px; top: 50%;
+    transform: translateY(-50%);
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    pointer-events: none;
+    opacity: .4;
+  }
+  .bg-ring2 {
+    position: absolute;
+    right: -100px; top: 50%;
+    transform: translateY(-50%);
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    pointer-events: none;
+    opacity: .3;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 2rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-tag {
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: .75rem;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+  }
+  .section-tag::after { content:''; flex: 1; height: 1px; background: var(--border); max-width: 80px; }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.15;
+    margin-bottom: .75rem;
+  }
+  .section-sub { font-size: 14px; color: var(--text2); max-width: 540px; margin-bottom: 3rem; }
+
+  /* ── MEMBERS GRID ── */
+  #members { background: var(--bg2); }
+  .members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .member-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.75rem;
+    transition: border-color .25s, transform .25s;
+    cursor: default;
+  }
+  .member-card:hover { border-color: var(--accent2); transform: translateY(-3px); }
+  .member-avatar {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent2), #085041);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif);
+    font-size: 20px;
+    color: var(--accent3);
+    margin-bottom: 1rem;
+    border: 2px solid var(--border);
+  }
+  .member-name { font-family: var(--serif); font-size: 17px; margin-bottom: 3px; }
+  .member-role { font-size: 12px; letter-spacing: .06em; color: var(--accent); text-transform: uppercase; margin-bottom: .75rem; }
+  .member-course { font-size: 13px; color: var(--text2); }
+  .member-email { font-size: 12px; color: var(--text3); margin-top: 4px; }
+  .member-bio { font-size: 13px; color: var(--text2); margin-top: .875rem; line-height: 1.65; border-top: 1px solid var(--border); padding-top: .875rem; }
+
+  /* ── COMPANY ── */
+  .company-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .info-block { margin-bottom: 2rem; }
+  .info-label { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: .4rem; }
+  .info-val { font-size: 16px; color: var(--text); }
+  .info-val-sm { font-size: 14px; color: var(--text2); line-height: 1.65; }
+  .highlight-box {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+  .highlight-box p { font-size: 14px; color: var(--text2); line-height: 1.7; }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--bg2); }
+  .projects-list { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1rem; }
+  .project-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 2rem;
+  }
+  .project-num {
+    font-family: var(--serif);
+    font-size: 48px;
+    color: var(--border);
+    line-height: 1;
+    float: right;
+    margin: -4px 0 0 1rem;
+  }
+  .project-title { font-family: var(--serif); font-size: 20px; margin-bottom: .5rem; }
+  .project-body { font-size: 14px; color: var(--text2); line-height: 1.7; margin-bottom: 1rem; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-size: 11px; letter-spacing: .06em;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--accent3);
+  }
+
+  /* ── DELIVERABLES ── */
+  .deliverables-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1rem;
+  }
+  .deliverable-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: border-color .2s;
+  }
+  .deliverable-card:hover { border-color: var(--accent); }
+  .del-icon { font-size: 24px; margin-bottom: .75rem; }
+  .del-title { font-family: var(--serif); font-size: 16px; margin-bottom: .5rem; }
+  .del-body { font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .del-link { display: inline-block; margin-top: .75rem; font-size: 12px; color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 1px; }
+  .del-link:hover { border-color: var(--accent); }
+
+  /* ── LEARNING ── */
+  #learning { background: var(--bg2); }
+  .learning-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .skill-list { list-style: none; }
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: .75rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .skill-item:last-child { border-bottom: none; }
+  .skill-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .skill-name { font-size: 14px; }
+  .skill-note { font-size: 12px; color: var(--text3); margin-top: 2px; }
+  .narrative-block { font-size: 14px; color: var(--text2); line-height: 1.8; }
+  .narrative-block p + p { margin-top: 1rem; }
+  blockquote {
+    border-left: 2px solid var(--accent);
+    padding-left: 1.25rem;
+    margin: 1.5rem 0;
+    font-family: var(--serif);
+    font-size: 16px;
+    color: var(--accent3);
+    font-style: italic;
+  }
+
+  /* ── TOOLS ── */
+  .tools-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+  .tool-group-title { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .tool-item {
+    padding: .625rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: .625rem;
+  }
+  .tool-item:last-child { border-bottom: none; }
+  .tool-bullet { width: 5px; height: 5px; border-radius: 50%; background: var(--accent2); flex-shrink: 0; }
+
+  /* ── SOLUTIONS ── */
+  #solutions { background: var(--bg2); }
+  .solution-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .solution-label { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); margin-bottom: .5rem; }
+  .solution-title { font-family: var(--serif); font-size: 19px; margin-bottom: .75rem; }
+  .solution-body { font-size: 14px; color: var(--text2); line-height: 1.7; }
+
+  /* ── REFLECTION ── */
+  .reflection-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+  .reflect-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+  }
+  .reflect-heading { font-family: var(--serif); font-size: 17px; margin-bottom: .875rem; color: var(--accent3); }
+  .reflect-body { font-size: 14px; color: var(--text2); line-height: 1.7; }
+  .final-quote {
+    text-align: center;
+    padding: 4rem 2rem;
+    max-width: 700px;
+    margin: 3rem auto 0;
+  }
+  .final-quote q {
+    font-family: var(--serif);
+    font-size: clamp(20px, 3vw, 30px);
+    color: var(--accent3);
+    font-style: italic;
+    line-height: 1.4;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .final-quote cite { font-size: 13px; color: var(--text3); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+  footer p { font-size: 13px; color: var(--text3); }
+  footer span { color: var(--accent); }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:768px){
+    .hero-grid, .company-layout, .learning-grid, .reflection-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .tools-cols { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .hero-deco { display: none; }
+    .bg-ring, .bg-ring2 { display: none; }
+  }
+  @media(max-width:480px){
+    .tools-cols { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <a class="nav-logo" href="#home">OJT Portfolio</a>
+  <ul class="nav-links">
+    <li><a href="#members">Members</a></li>
+    <li><a href="#company">Company</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#deliverables">Deliverables</a></li>
+    <li><a href="#learning">Learning</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#solutions">Solutions</a></li>
+    <li><a href="#reflection">Reflection</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ── HERO / HOME ── -->
+<section id="home">
+  <div class="bg-ring"></div>
+  <div class="bg-ring2"></div>
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow">On-the-Job Training · Batch 2026</div>
+      <h1 class="hero-title">
+        OJT E-Portfolio<br>
+        <em>Gencys Digital Trading Inc.</em>
+      </h1>
+      <p class="hero-body">
+        A comprehensive showcase of our on-the-job training experience, professional growth, and the real-world contributions we made at <strong>Gencys Digital Trading Inc</strong>.
+      </p>
+      <div class="hero-meta">
+        <div>
+          <div class="hero-stat-label">Members</div>
+          <div class="hero-stat-val">9</div>
+        </div>
+        <div>
+          <div class="hero-stat-label">Training Hours</div>
+          <div class="hero-stat-val">500 hrs</div>
+        </div>
+        <div>
+          <div class="hero-stat-label">Course</div>
+          <div class="hero-stat-val">BSIT / BSIS</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-deco">
+      <div class="hero-deco-card">
+        <div class="hdc-label">University</div>
+        <div class="hdc-val">Technological Institute of the Philippines</div>
+      </div>
+      <div class="hero-deco-card">
+        <div class="hdc-label">School Year</div>
+        <div class="hdc-val">2025 – 2026</div>
+      </div>
+      <div class="hero-deco-card">
+        <div class="hdc-label">Training Period</div>
+        <div class="hdc-val">February 2026 – May 2026</div>
+      </div>
+      <div class="hero-deco-card">
+        <div class="hdc-label">Supervisor</div>
+        <div class="hdc-val">Aina Mae Arroyo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 1: STUDENT PROFILES ── -->
+<section id="members">
+  <div class="section-inner">
+    <div class="section-tag">Section 01</div>
+    <h2 class="section-title">Student Profiles</h2>
+    <p class="section-sub">Meet the nine members of our OJT group — our backgrounds, courses, and aspirations.</p>
+
+    <div class="members-grid">
+
+      <!-- MEMBER 1 -->
+      <div class="member-card fade-up">
+        <div class="member-avatar">M1</div>
+        <div class="member-name">John Patrick Rolloda</div>
+        <div class="member-role">Frontend and Backend Developer</div>
+        <div class="member-course">BSIT · 4th Year · IT42S1</div>
+        <div class="member-email">mjprolloda@tip.edu.ph</div>
+        <div class="member-bio">
+          <p>[Paragraph 1 — Introduce yourself. Your full name, course, year level, and the university you attend. Example: I am John Patrick Rolloda, a 4th-year Bachelor of Science in Information Technology student at Technological Institute of the Philippines.]</p>
+           <p>[Paragraph 2 — Academic background. What subjects, projects, or specializations have shaped you? What are you good at? Example: Throughout my academic journey, I have developed strong skills in both frontend and backend development, working with technologies such as HTML, CSS, JavaScript, PHP, and MySQL in various school projects and case studies.]</p>
+          <p>[Paragraph 3 — Career aspirations. Where do you see yourself after graduation? What kind of work excites you? Example: I aspire to become a full-stack developer in a company where I can build meaningful digital products, continuously grow my technical expertise, and eventually lead development teams in the future.]</p>
+        </div>
+      </div>
+
+      <!-- MEMBER 2 -->
+      <div class="member-card fade-up">
+        <div class="member-avatar">M2</div>
+        <div class="member-name">Scott Andrew P. Mamhut</div>
+        <div class="member-role">Frontend and Backend Developer</div>
+        <div class="member-course">BSIT · 4th Year · IT42S1</div>
+        <div class="member-email">email</div>
+        <div class="member-bio">
+          <p>[Paragraph 1 — Introduce yourself. Your full name, course, year level, and the university you attend. Example: I am John Patrick Rolloda, a 4th-year Bachelor of Science in Information Technology student at Technological Institute of the Philippines.]</p>
+           <p>[Paragraph 2 — Academic background. What subjects, projects, or specializations have shaped you? What are you good at? Example: Throughout my academic journey, I have developed strong skills in both frontend and backend development, working with technologies such as HTML, CSS, JavaScript, PHP, and MySQL in various school projects and case studies.]</p>
+          <p>[Paragraph 3 — Career aspirations. Where do you see yourself after graduation? What kind of work excites you? Example: I aspire to become a full-stack developer in a company where I can build meaningful digital products, continuously grow my technical expertise, and eventually lead development teams in the future.]</p>
+        </div>
+      </div>
+
+      <!-- MEMBER 3 -->
+      <div class="member-card fade-up">
+        <div class="member-avatar">M3</div>
+        <div class="member-name">Roi Jefferson L. Mondido</div>
+        <div class="member-role">Quality Assurance</div>
+        <div class="member-course">BSIS · 4th Year · IT42S1</div>
+        <div class="member-email">email</div>
+        <div class="member-bio">
+          <p>[Paragraph 1 — Introduce yourself. Your full name, course, year level, and the university you attend. Example: I am John Patrick Rolloda, a 4th-year Bachelor of Science in Information Technology student at Technological Institute of the Philippines.]</p>
+           <p>[Paragraph 2 — Academic background. What subjects, projects, or specializations have shaped you? What are you good at? Example: Throughout my academic journey, I have developed strong skills in both frontend and backend development, working with technologies such as HTML, CSS, JavaScript, PHP, and MySQL in various school projects and case studies.]</p>
+          <p>[Paragraph 3 — Career aspirations. Where do you see yourself after graduation? What kind of work excites you? Example: I aspire to become a full-stack developer in a company where I can build meaningful digital products, continuously grow my technical expertise, and eventually lead development teams in the future.]</p>
+        </div>
+      </div>
+
+      <!-- MEMBER 4 -->
+      <div class="member-card fade-up">
+        <div class="member-avatar">M4</div>
+        <div class="member-name">Lyka Joyce Y. Arnesto</div>
+        <div class="member-role">Quality Assurance</div>
+        <div class="member-course">BSIT · 4th Year · IT42S1</div>
+        <div class="member-email">email</div>
+        <div class="member-bio">
+          <p>[Paragraph 1 — Introduce yourself. Your full name, course, year level, and the university you attend. Example: I am John Patrick Rolloda, a 4th-year Bachelor of Science in Information Technology student at Technological Institute of the Philippines.]</p>
+           <p>[Paragraph 2 — Academic background. What subjects, projects, or specializations have shaped you? What are you good at? Example: Throughout my academic journey, I have developed strong skills in both frontend and backend development, working with technologies such as HTML, CSS, JavaScript, PHP, and MySQL in various school projects and case studies.]</p>
+          <p>[Paragraph 3 — Career aspirations. Where do you see yourself after graduation? What kind of work excites you? Example: I aspire to become a full-stack developer in a company where I can build meaningful digital products, continuously grow my technical expertise, and eventually lead development teams in the future.]</p>
+        </div>
+      </div>
+
+      <!-- MEMBER 5 -->
+      <div class="member-card fade-up">
+        <div class="member-avatar">M5</div>
+        <div class="member-name">Dhan Angelo Bernardo</div>
+        <div class="member-role">Quality Assurance</div>
+        <div class="member-course">BSIS · 4th Year · IT42S1</div>
+        <div class="member-email">email</div>
+        <div class="member-bio">
+          <p>[Paragraph 1 — Introduce yourself. Your full name, course, year level, and the university you attend. Example: I am John Patrick Rolloda, a 4th-year Bachelor of Science in Information Technology student at Technological Institute of the Philippines.]</p>
+           <p>[Paragraph 2 — Academic background. What subjects, projects, or specializations have shaped you? What are you good at? Example: Throughout my academic journey, I have developed strong skills in both frontend and backend development, working with technologies such as HTML, CSS, JavaScript, PHP, and MySQL in various school projects and case studies.]</p>
+          <p>[Paragraph 3 — Career aspirations. Where do you see yourself after graduation? What kind of work excites you? Example: I aspire to become a full-stack developer in a company where I can build meaningful digital products, continuously grow my technical expertise, and eventually lead development teams in the future.]</p>
+        </div>
+      </div>
+
+      <!-- MEMBER 6 -->
+     <div class="member-card fade-up">
+        <div class="member-avatar">M6</div>
+        <div class="member-name">Angel Mae C. Pacquing</div>
+        <div class="member-role">Quality Assurance</div>
+        <div class="member-course">BSIS · 4th Year · IT42S1</div>
+        <div class="member-email">email</div>
+        <div class="member-bio">
+          <p>[Paragraph 1 — Introduce yourself. Your full name, course, year level, and the university you attend. Example: I am John Patrick Rolloda, a 4th-year Bachelor of Science in Information Technology student at Technological Institute of the Philippines.]</p>
+           <p>[Paragraph 2 — Academic background. What subjects, projects, or specializations have shaped you? What are you good at? Example: Throughout my academic journey, I have developed strong skills in both frontend and backend development, working with technologies such as HTML, CSS, JavaScript, PHP, and MySQL in various school projects and case studies.]</p>
+          <p>[Paragraph 3 — Career aspirations. Where do you see yourself after graduation? What kind of work excites you? Example: I aspire to become a full-stack developer in a company where I can build meaningful digital products, continuously grow my technical expertise, and eventually lead development teams in the future.]</p>
+        </div>
+      </div>
+
+      <!-- MEMBER 7 -->
+      <div class="member-card fade-up">
+        <div class="member-avatar">M7</div>
+        <div class="member-name">Maric C. Bolonos</div>
+        <div class="member-role">Social Media & Graphics </div>
+        <div class="member-course">BSIS · 4th Year · IT42S1</div>
+        <div class="member-email">email</div>
+        <div class="member-bio">
+          <p>[Paragraph 1 — Introduce yourself. Your full name, course, year level, and the university you attend. Example: I am John Patrick Rolloda, a 4th-year Bachelor of Science in Information Technology student at Technological Institute of the Philippines.]</p>
+           <p>[Paragraph 2 — Academic background. What subjects, projects, or specializations have shaped you? What are you good at? Example: Throughout my academic journey, I have developed strong skills in both frontend and backend development, working with technologies such as HTML, CSS, JavaScript, PHP, and MySQL in various school projects and case studies.]</p>
+          <p>[Paragraph 3 — Career aspirations. Where do you see yourself after graduation? What kind of work excites you? Example: I aspire to become a full-stack developer in a company where I can build meaningful digital products, continuously grow my technical expertise, and eventually lead development teams in the future.]</p>
+        </div>
+      </div>
+
+      <!-- MEMBER 8 -->
+      <div class="member-card fade-up">
+        <div class="member-avatar">M8</div>
+        <div class="member-name">Vanesa Joy B. Pana</div>
+        <div class="member-role">Social Media & Graphics </div>
+        <div class="member-course">BSIS · 4th Year · IT42S1</div>
+        <div class="member-email">email</div>
+        <div class="member-bio">
+          <p>[Paragraph 1 — Introduce yourself. Your full name, course, year level, and the university you attend. Example: I am John Patrick Rolloda, a 4th-year Bachelor of Science in Information Technology student at Technological Institute of the Philippines.]</p>
+           <p>[Paragraph 2 — Academic background. What subjects, projects, or specializations have shaped you? What are you good at? Example: Throughout my academic journey, I have developed strong skills in both frontend and backend development, working with technologies such as HTML, CSS, JavaScript, PHP, and MySQL in various school projects and case studies.]</p>
+          <p>[Paragraph 3 — Career aspirations. Where do you see yourself after graduation? What kind of work excites you? Example: I aspire to become a full-stack developer in a company where I can build meaningful digital products, continuously grow my technical expertise, and eventually lead development teams in the future.]</p>
+        </div>
+      </div>
+
+      <!-- MEMBER 9 -->
+      <div class="member-card fade-up">
+        <div class="member-avatar">M9</div>
+        <div class="member-name">Roi Jefferson L. Mondido</div>
+        <div class="member-role">Quality Assurance</div>
+        <div class="member-course">BSIS · 4th Year · IT42S1</div>
+        <div class="member-email">email</div>
+        <div class="member-bio">
+          <p>[Paragraph 1 — Introduce yourself. Your full name, course, year level, and the university you attend. Example: I am John Patrick Rolloda, a 4th-year Bachelor of Science in Information Technology student at Technological Institute of the Philippines.]</p>
+           <p>[Paragraph 2 — Academic background. What subjects, projects, or specializations have shaped you? What are you good at? Example: Throughout my academic journey, I have developed strong skills in both frontend and backend development, working with technologies such as HTML, CSS, JavaScript, PHP, and MySQL in various school projects and case studies.]</p>
+          <p>[Paragraph 3 — Career aspirations. Where do you see yourself after graduation? What kind of work excites you? Example: I aspire to become a full-stack developer in a company where I can build meaningful digital products, continuously grow my technical expertise, and eventually lead development teams in the future.]</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 2: COMPANY PROFILE ── -->
+<section id="company">
+  <div class="section-inner">
+    <div class="section-tag">Section 02</div>
+    <h2 class="section-title">Company Profile</h2>
+    <p class="section-sub">An overview of the organization where we completed our on-the-job training.</p>
+
+    <div class="company-layout">
+      <div>
+        <div class="info-block">
+          <div class="info-label">Company Name</div>
+          <div class="info-val">[Full Legal Name of the Company]</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Industry</div>
+          <div class="info-val">[e.g., Information Technology / Healthcare / Finance]</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Location</div>
+          <div class="info-val">[Complete Address, City, Province]</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Company Size</div>
+          <div class="info-val">[e.g., 50–200 employees / Large enterprise]</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Main Products / Services</div>
+          <div class="info-val info-val-sm">[Describe in 1–2 sentences what the company primarily offers — software solutions, IT services, logistics, etc.]</div>
+        </div>
+      </div>
+      <div>
+        <div class="info-block">
+          <div class="info-label">Our Department</div>
+          <div class="info-val">[e.g., IT Department / Software Development Team]</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Our Role</div>
+          <div class="info-val">[e.g., IT Intern / Junior Developer Trainee]</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Immediate Supervisor</div>
+          <div class="info-val">[Supervisor's Name and Position]</div>
+        </div>
+        <div class="highlight-box">
+          <p>
+            [Write a 3–4 sentence overview of the company here. Cover the company's mission, how long it has been operating, its standing in the industry, and any notable achievements or clients. Example: XYZ Corporation is a leading IT solutions provider established in 2010, serving clients across the Philippines and Southeast Asia. The company specializes in enterprise resource planning systems and cloud migration services, with a team of over 150 professionals. We were fortunate to train under their Software Development division.]
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 3: BACKGROUND & PROJECT INVOLVEMENT ── -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-tag">Section 03</div>
+    <h2 class="section-title">Background of Training &amp; Project Involvement</h2>
+    <p class="section-sub">The projects we were involved in, their objectives, and our specific responsibilities.</p>
+
+    <div class="projects-list">
+
+      <div class="project-card fade-up">
+        <div class="project-num">01</div>
+        <div class="project-title">[Project Name 1 — e.g., Internal Inventory Management System]</div>
+        <p class="project-body">
+          [Describe the project in 3–4 sentences. What was it trying to solve? What was its scope? How did it align with the company's operations? Example: The inventory management system project aimed to replace the company's outdated manual tracking spreadsheets with a centralized digital solution. This directly supported the company's goal of reducing stock discrepancies by 30% by end of year. Our group was assigned to the front-end development and testing phases of the project.]
+        </p>
+        <div class="tag-row">
+          <span class="tag">[Your responsibility — e.g., UI Development]</span>
+          <span class="tag">[Your responsibility — e.g., Testing & QA]</span>
+          <span class="tag">[Your responsibility — e.g., Documentation]</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-num">02</div>
+        <div class="project-title">[Project Name 2 — e.g., Company Website Redesign]</div>
+        <p class="project-body">
+          [Describe the second project. What problem did it address? What were the objectives? What part did your group play? Replace this with your actual project description. If your group only worked on one project, delete this card.]
+        </p>
+        <div class="tag-row">
+          <span class="tag">[Responsibility]</span>
+          <span class="tag">[Responsibility]</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-num">03</div>
+        <div class="project-title">[Project Name 3 — e.g., Monthly IT Report Automation]</div>
+        <p class="project-body">
+          [Describe a third project or task if applicable. If not, remove this card. This could also be a major recurring task or assignment you handled throughout the OJT period.]
+        </p>
+        <div class="tag-row">
+          <span class="tag">[Responsibility]</span>
+          <span class="tag">[Responsibility]</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 4: DELIVERABLES ── -->
+<section id="deliverables">
+  <div class="section-inner">
+    <div class="section-tag">Section 04</div>
+    <h2 class="section-title">Project Involvement Deliverables</h2>
+    <p class="section-sub">Tangible outputs we produced and their impact on the project and organization.</p>
+
+    <div class="deliverables-grid">
+
+      <div class="deliverable-card fade-up">
+        <div class="del-icon">📄</div>
+        <div class="del-title">[Deliverable 1 — e.g., Technical Documentation]</div>
+        <p class="del-body">[Describe this deliverable in 2–3 sentences. What was it? How did it contribute to the project? Who used it? Replace with actual content.]</p>
+        <a class="del-link" href="[link-to-file]">View Sample ↗</a>
+      </div>
+
+      <div class="deliverable-card fade-up">
+        <div class="del-icon">💻</div>
+        <div class="del-title">[Deliverable 2 — e.g., Working Web Module / Feature]</div>
+        <p class="del-body">[Describe the code or system feature you built. What functionality did it add? What technology was used? Replace with actual content.]</p>
+        <a class="del-link" href="[link-to-file]">View Sample ↗</a>
+      </div>
+
+      <div class="deliverable-card fade-up">
+        <div class="del-icon">📊</div>
+        <div class="del-title">[Deliverable 3 — e.g., Weekly Progress Reports]</div>
+        <p class="del-body">[Describe the reports you submitted, how frequently, and how they were used by supervisors or management to track project progress.]</p>
+        <a class="del-link" href="[link-to-file]">View Sample ↗</a>
+      </div>
+
+      <div class="deliverable-card fade-up">
+        <div class="del-icon">🎨</div>
+        <div class="del-title">[Deliverable 4 — e.g., UI/UX Design Mockups]</div>
+        <p class="del-body">[If applicable, describe design work produced — wireframes, prototypes, or final UI designs. Link to Figma or screenshots.]</p>
+        <a class="del-link" href="[link-to-file]">View Sample ↗</a>
+      </div>
+
+      <div class="deliverable-card fade-up">
+        <div class="del-icon">📋</div>
+        <div class="del-title">[Deliverable 5 — e.g., Test Cases & QA Reports]</div>
+        <p class="del-body">[Describe any testing documentation, bug reports, or quality assurance deliverables produced. How did these impact the project's quality?]</p>
+        <a class="del-link" href="[link-to-file]">View Sample ↗</a>
+      </div>
+
+      <div class="deliverable-card fade-up">
+        <div class="del-icon">📎</div>
+        <div class="del-title">[Deliverable 6 — e.g., Presentation / Final Demo]</div>
+        <p class="del-body">[Describe the final presentation, demo, or report submitted to the company at the end of the OJT period. What were the outcomes?]</p>
+        <a class="del-link" href="[link-to-file]">View Sample ↗</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 5: PROFESSIONAL LEARNING ── -->
+<section id="learning">
+  <div class="section-inner">
+    <div class="section-tag">Section 05</div>
+    <h2 class="section-title">Professional Learning &amp; Development</h2>
+    <p class="section-sub">The skills, knowledge, and professional behaviors we developed throughout our training.</p>
+
+    <div class="learning-grid">
+      <div>
+        <p style="font-size:13px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem;">Skills Developed</p>
+        <ul class="skill-list">
+          <li class="skill-item">
+            <div class="skill-dot"></div>
+            <div>
+              <div class="skill-name">[Skill 1 — e.g., Collaborative Development with Git]</div>
+              <div class="skill-note">[Brief note on how you applied it]</div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <div class="skill-dot"></div>
+            <div>
+              <div class="skill-name">[Skill 2 — e.g., Professional Communication]</div>
+              <div class="skill-note">[Brief note on how you applied it]</div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <div class="skill-dot"></div>
+            <div>
+              <div class="skill-name">[Skill 3 — e.g., Agile Sprint Planning]</div>
+              <div class="skill-note">[Brief note on how you applied it]</div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <div class="skill-dot"></div>
+            <div>
+              <div class="skill-name">[Skill 4 — e.g., Time Management Under Deadlines]</div>
+              <div class="skill-note">[Brief note on how you applied it]</div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <div class="skill-dot"></div>
+            <div>
+              <div class="skill-name">[Skill 5 — e.g., Technical Report Writing]</div>
+              <div class="skill-note">[Brief note on how you applied it]</div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <div class="skill-dot"></div>
+            <div>
+              <div class="skill-name">[Skill 6 — Add more as needed]</div>
+              <div class="skill-note">[Brief note]</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="narrative-block">
+        <blockquote>
+          "[Insert a meaningful quote from one of the group members about the OJT experience.]"
+        </blockquote>
+        <p>
+          [Write 2–3 paragraphs about how the OJT experience contributed to your group's professional growth. What did you learn about real workplace environments that your school could not fully prepare you for? Example: Our OJT experience at [Company] gave us direct exposure to how software is developed in a commercial setting, far beyond what we experienced in classroom exercises. We learned to work with existing codebases, handle client-facing requirements, and communicate progress in a professional manner.]
+        </p>
+        <p style="margin-top:1rem">
+          [Continue here — discuss how team dynamics, workplace culture, or industry standards were eye-opening. What did you observe about professionalism, collaboration, or work ethic that changed your perspective?]
+        </p>
+        <p style="margin-top:1rem">
+          [Final paragraph — what did this experience teach you about your chosen field that reinforced or surprised you? How does it change how you approach your remaining academic years?]
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 6: TOOLS & TECHNIQUES ── -->
+<section id="tools">
+  <div class="section-inner">
+    <div class="section-tag">Section 06</div>
+    <h2 class="section-title">Modern Techniques, Skills &amp; Tools</h2>
+    <p class="section-sub">Technologies, frameworks, and methodologies we encountered and applied on the job.</p>
+
+    <div class="tools-cols">
+
+      <div>
+        <div class="tool-group-title">Development Tools</div>
+        <div class="tool-item"><div class="tool-bullet"></div>[e.g., Visual Studio Code]</div>
+        <div class="tool-item"><div class="tool-bullet"></div>[e.g., Git / GitHub]</div>
+        <div class="tool-item"><div class="tool-bullet"></div>[e.g., XAMPP / Laragon]</div>
+        <div class="tool-item"><div class="tool-bullet"></div>[e.g., Postman]</div>
+        <div class="tool-item"><div class="tool-bullet"></div>[Add your tools here]</div>
+      </div>
+
+      <div>
+        <div class="tool-group-title">Frameworks & Technologies</div>
+        <div class="tool-item"><div class="tool-bullet"></div>[e.g., Laravel / React / Vue]</div>
+        <div class="tool-item"><div class="tool-bullet"></div>[e.g., MySQL / PostgreSQL]</div>
+        <div class="tool-item"><div class="tool-bullet"></div>[e.g., REST API / JSON]</div>
+        <div class="tool-item"><div class="tool-bullet"></div>[e.g., Bootstrap / Tailwind]</div>
+        <div class="tool-item"><div class="tool-bullet"></div>[Add your tools here]</div>
+      </div>
+
+      <div>
+        <div class="tool-group-title">Communication & PM Tools</div>
+        <div class="tool-item"><div class="tool-bullet"></div>[e.g., Slack / MS Teams]</div>
+        <div class="tool-item"><div class="tool-bullet"></div>[e.g., Trello / Jira]</div>
+        <div class="tool-item"><div class="tool-bullet"></div>[e.g., Google Workspace]</div>
+        <div class="tool-item"><div class="tool-bullet"></div>[e.g., Figma / Canva]</div>
+        <div class="tool-item"><div class="tool-bullet"></div>[Add your tools here]</div>
+      </div>
+
+    </div>
+
+    <div class="highlight-box" style="margin-top:2.5rem">
+      <p>
+        <strong style="color:var(--accent3)">Methodology used:</strong> [Describe the development or project management methodology used at the company — e.g., Agile/Scrum with 2-week sprints, Kanban boards, Waterfall model, etc. Explain how you participated in meetings, stand-ups, sprint reviews, or other structured processes.]
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 7: DISCIPLINE-RELATED SOLUTIONS ── -->
+<section id="solutions">
+  <div class="section-inner">
+    <div class="section-tag">Section 07</div>
+    <h2 class="section-title">Discipline-Related Solutions Integrated</h2>
+    <p class="section-sub">How our academic training contributed real solutions to the company's challenges.</p>
+
+    <div class="solution-card fade-up">
+      <div class="solution-label">Challenge Identified</div>
+      <div class="solution-title">[Challenge 1 — e.g., Inefficient Manual Data Entry Process]</div>
+      <p class="solution-body">
+        [Describe the problem you identified and how your academic background helped you address it. Example: The company's finance team was manually encoding data from physical forms into spreadsheets daily, which was time-consuming and prone to errors. Drawing from our database management coursework, we proposed and helped implement a simple web form connected to a MySQL database that automated the data entry workflow. This reduced encoding time by an estimated 40% and virtually eliminated transcription errors.]
+      </p>
+    </div>
+
+    <div class="solution-card fade-up">
+      <div class="solution-label">Solution Contributed</div>
+      <div class="solution-title">[Challenge 2 — e.g., Lack of System Documentation]</div>
+      <p class="solution-body">
+        [Describe a second contribution based on your academic discipline. How did what you learned in school directly apply? What was the outcome? If only one applies, remove this card.]
+      </p>
+    </div>
+
+    <div class="solution-card fade-up">
+      <div class="solution-label">Academic Knowledge Applied</div>
+      <div class="solution-title">[Challenge 3 — e.g., UI Usability Issues on Internal Tools]</div>
+      <p class="solution-body">
+        [Describe a third academic contribution. This could be applying knowledge from HCI, systems analysis, networking, or any course-specific subject to solve a workplace problem.]
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 8: REFLECTION ── -->
+<section id="reflection">
+  <div class="section-inner">
+    <div class="section-tag">Section 08</div>
+    <h2 class="section-title">Summary of OJT Reflection</h2>
+    <p class="section-sub">Looking back on everything — our challenges, growth, and the road ahead.</p>
+
+    <div class="reflection-grid">
+
+      <div class="reflect-card fade-up">
+        <div class="reflect-heading">Biggest Challenges</div>
+        <p class="reflect-body">
+          [Describe the most significant challenges your group faced during the OJT. Were there technical hurdles? Communication difficulties? Unfamiliar tools or workflows? Be honest and specific. Example: One of our biggest challenges was adapting to a professional codebase that was significantly larger and more complex than anything we had worked with in school. We also struggled initially with managing our time across multiple tasks and deadlines simultaneously.]
+        </p>
+      </div>
+
+      <div class="reflect-card fade-up">
+        <div class="reflect-heading">Proudest Successes</div>
+        <p class="reflect-body">
+          [Describe the accomplishments your group is most proud of. Did you complete a feature ahead of schedule? Receive commendation from your supervisor? Solve a problem creatively? Replace with actual achievements from your OJT experience.]
+        </p>
+      </div>
+
+      <div class="reflect-card fade-up">
+        <div class="reflect-heading">Personal Growth</div>
+        <p class="reflect-body">
+          [Reflect on how each of you grew as individuals and as a team. How did the OJT change your approach to work, collaboration, or problem-solving? What professional habits did you develop? This should be personal and genuine.]
+        </p>
+      </div>
+
+      <div class="reflect-card fade-up">
+        <div class="reflect-heading">Key Takeaways for Our Future</div>
+        <p class="reflect-body">
+          [Summarize the 2–3 most important lessons from your OJT that you will carry into your careers. How has this experience shaped your understanding of your chosen field? What will you do differently in your remaining academic years as a result?]
+        </p>
+      </div>
+
+    </div>
+
+    <div class="final-quote fade-up">
+      <q>[Insert a meaningful group reflection statement here — something that captures the essence of your OJT journey. Make it genuine and forward-looking.]</q>
+      <cite>— [Group Name], OJT Batch 2025</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>OJT E-Portfolio · <span>[Group Name]</span> · [University Name] · [Course] · 2025</p>
+  <p style="margin-top:.5rem">Completed at <span>[Company Name]</span> · [Training Period]</p>
+</footer>
+
+<script>
+  // Smooth scroll fade-in on scroll
+  const faders = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  faders.forEach(el => observer.observe(el));
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 100) current = sec.getAttribute('id');
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+    });
+  });
+
+  // Mobile menu toggle
+  let menuOpen = false;
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    menuOpen = !menuOpen;
+    if (menuOpen) {
+      links.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:60px;left:0;right:0;background:rgba(13,15,14,0.97);padding:1.5rem 2rem;gap:1.25rem;border-bottom:1px solid rgba(93,202,165,0.15)';
+    } else {
+      links.style.cssText = 'display:none';
+    }
+  }
+</script>
+
+</body>
+</html>

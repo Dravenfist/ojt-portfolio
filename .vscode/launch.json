@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "msedge",
+            "request": "launch",
+            "name": "Open Ojt.html",
+            "file": "d:\\e portfolio\\Ojt.html",
+            "runtimeArgs": ["--remote-debugging-port=9222"],
+            "userDataDir": true
+        }
+    ]
+}
